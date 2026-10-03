@@ -1,0 +1,8 @@
+{
+  "name": "web Quản Lý tổ dân phố",
+  "description": "Trợ lý Trí tuệ Nhân tạo hỗ trợ Tổ trưởng và Ban quản lý tổ dân phố xử lý công việc hành chính, truyền thông dân cư và quản lý dữ liệu an toàn.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

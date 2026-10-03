@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Nhân Khẩu & Cư Dân - Tổ Dân Phố Số 5</title>
+  <meta name="description" content="Danh sách cư dân, quản lý thông tin nhân khẩu, CCCD và biến động cư trú tại Tổ dân phố số 5.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+  <div class="app-container">
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- SIDEBAR BÊN TRÁI -->
+    <aside id="app-sidebar" class="sidebar">
+      <div class="p-5 border-b border-slate-700/60 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-blue-500/30">
+          <i class="fa-solid fa-landmark-flag"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold text-white tracking-wide uppercase leading-tight">Tổ Dân Phố Số 5</h2>
+          <p class="text-[11px] text-slate-400">P. Dịch Vọng Hậu · Cầu Giấy</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 py-4 space-y-1 overflow-y-auto">
+        <a href="../index.html" class="nav-item">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Bảng điều khiển</span>
+        </a>
+
+        <a href="ho-khau.html" class="nav-item">
+          <i class="fa-solid fa-address-book"></i>
+          <span>Sổ Hộ Khẩu</span>
+        </a>
+
+        <a href="nhan-khau.html" class="nav-item active">
+          <i class="fa-solid fa-users"></i>
+          <span>Cư Dân / Nhân Khẩu</span>
+        </a>
+
+        <a href="thu-phi.html" class="nav-item">
+          <i class="fa-solid fa-money-check-dollar"></i>
+          <span>Thu Phí & Quỹ Đóng Góp</span>
+        </a>
+
+        <a href="phan-anh.html" class="nav-item">
+          <i class="fa-solid fa-comments"></i>
+          <span>Phản Ánh & Kiến Nghị</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Hệ Thống & Báo Cáo</div>
+        </div>
+
+        <a href="#" onclick="alert('Dữ liệu nhân khẩu được mã hóa an toàn theo Nghị định 13/2023/NĐ-CP.'); return false;" class="nav-item text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Bảo Mật Dân Cư</span>
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-700/60 bg-slate-900/40">
+        <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Dữ liệu cư dân định danh</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Liên thông VNeID</p>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <div class="main-content">
+      <!-- TOP NAVBAR -->
+      <header class="top-navbar">
+        <div class="flex items-center gap-3">
+          <button id="sidebar-toggle-btn" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Menu">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+          <div>
+            <h1 class="text-base font-bold text-slate-800 leading-tight">Danh Sách Cư Dân & Nhân Khẩu</h1>
+            <p class="text-xs text-slate-500 hidden sm:block">Quản lý hồ sơ công dân, CCCD, nghề nghiệp và quan hệ trong hộ</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2.5 pl-3 border-l border-slate-200">
+            <img id="navbar-user-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-slate-300">
+            <div class="hidden md:block text-left">
+              <div id="navbar-user-name" class="text-xs font-bold text-slate-800">Nguyễn Văn Hưng</div>
+              <div id="navbar-user-role" class="text-[11px] text-blue-600 font-semibold">Tổ trưởng TDP 5</div>
+            </div>
+            <button id="navbar-logout-btn" class="ml-1 p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition text-xs font-semibold" title="Đăng xuất">
+              <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE CONTENT -->
+      <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6">
+
+        <!-- Top summary metric cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Tổng Nhân Khẩu</span>
+            <div id="count-nk-total" class="text-2xl font-bold text-blue-900 mt-1">18</div>
+            <span class="text-[11px] text-blue-600 font-medium">Toàn địa bàn</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Giới Tính Nam / Nữ</span>
+            <div id="count-nk-gender" class="text-2xl font-bold text-emerald-700 mt-1">10 / 8</div>
+            <span class="text-[11px] text-emerald-600 font-medium">55.5% Nam · 44.5% Nữ</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Thường Trú</span>
+            <div id="count-nk-thuong-tru" class="text-2xl font-bold text-indigo-700 mt-1">14</div>
+            <span class="text-[11px] text-indigo-600 font-medium">Cư trú ổn định</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Tạm Trú / Tạm Vắng</span>
+            <div id="count-nk-tam-tru-vang" class="text-2xl font-bold text-amber-700 mt-1">3 / 1</div>
+            <span class="text-[11px] text-amber-600 font-medium">Có khai báo</span>
+          </div>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+              </span>
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Tìm theo Họ tên, Số CCCD, Điện thoại, Địa chỉ..." 
+                class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs md:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition"
+              >
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="filter-hokhau" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Lọc theo Sổ Hộ Khẩu --</option>
+              </select>
+
+              <select id="filter-cu-tru" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Tình trạng cư trú --</option>
+                <option value="Thường trú">Thường trú</option>
+                <option value="Tạm trú">Tạm trú</option>
+                <option value="Tạm vắng">Tạm vắng</option>
+              </select>
+
+              <select id="filter-gioi-tinh" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Giới tính --</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+
+              <!-- Nút Thêm Mới -->
+              <button onclick="openCreateModal()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Thêm Nhân Khẩu</span>
+              </button>
+
+              <!-- Xuất CSV -->
+              <button onclick="exportCSV()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition" title="Xuất danh sách">
+                <i class="fa-solid fa-file-excel text-emerald-600"></i>
+                <span class="hidden sm:inline">Xuất File</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG DANH SÁCH NHÂN KHẨU -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="table-responsive">
+            <table class="custom-table text-left">
+              <thead>
+                <tr>
+                  <th>Họ Và Tên</th>
+                  <th>Số CCCD / ĐDCN</th>
+                  <th>Ngày Sinh</th>
+                  <th class="text-center">Giới Tính</th>
+                  <th>Quan Hệ Với Chủ Hộ</th>
+                  <th>Sổ Hộ Khẩu / Địa Chỉ</th>
+                  <th class="text-center">Tình Trạng</th>
+                  <th>Nghề Nghiệp</th>
+                  <th class="text-right">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="nhankhau-table-body" class="divide-y divide-slate-100">
+                <!-- Nạp tự động qua JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL: THÊM HOẶC SỬA NHÂN KHẨU -->
+  <div id="nhankhau-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50 rounded-t-xl">
+        <h3 id="modal-title" class="text-base font-bold text-slate-800 flex items-center gap-2">
+          <i class="fa-solid fa-user-plus text-blue-600"></i>
+          <span>Khai Báo Nhân Khẩu Mới</span>
+        </h3>
+        <button onclick="closeModal('nhankhau-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="nhankhau-form" class="p-5 space-y-4">
+        <input type="hidden" id="form-edit-id">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Họ Và Tên (*)</label>
+            <input type="text" id="form-ho-ten" required placeholder="Nguyễn Văn A" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số CCCD / Mã Định Danh (12 số)</label>
+            <input type="text" id="form-cccd" placeholder="00108000xxxx" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Ngày Sinh (*)</label>
+            <input type="date" id="form-ngay-sinh" required class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Giới Tính (*)</label>
+            <select id="form-gioi-tinh" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Thuộc Sổ Hộ Khẩu (*)</label>
+            <select id="form-ma-ho" required class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <!-- Danh sách mã hộ tự động nạp -->
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Quan Hệ Với Chủ Hộ (*)</label>
+            <select id="form-quan-he" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Chủ hộ">Chủ hộ</option>
+              <option value="Vợ">Vợ</option>
+              <option value="Chồng">Chồng</option>
+              <option value="Con">Con</option>
+              <option value="Bố">Bố</option>
+              <option value="Mẹ">Mẹ</option>
+              <option value="Anh/Chị/Em">Anh / Chị / Em</option>
+              <option value="Cháu">Cháu</option>
+              <option value="Thành viên">Thành viên khác</option>
+            </select>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Địa Chỉ Chi Tiết</label>
+            <input type="text" id="form-dia-chi" placeholder="Số nhà ..., Ngõ 48 Phan Văn Trường" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số Điện Thoại</label>
+            <input type="tel" id="form-sdt" placeholder="09xxxxxxxx" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Tình Trạng Cư Trú (*)</label>
+            <select id="form-tinh-trang" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Thường trú">Thường trú</option>
+              <option value="Tạm trú">Tạm trú</option>
+              <option value="Tạm vắng">Tạm vắng</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Nghề Nghiệp Hiện Tại</label>
+            <input type="text" id="form-nghe-nghiep" placeholder="Công chức, Kỹ sư, Bác sĩ, Học sinh..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Nơi Làm Việc / Học Tập</label>
+            <input type="text" id="form-noi-lam-viec" placeholder="Tên công ty, trường học..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Ghi Chú Thêm</label>
+            <textarea id="form-ghi-chu" rows="2" placeholder="Ghi chú về đảng viên, hội đồng nhân dân, thương bệnh binh, diện miễn giảm..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white"></textarea>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal('nhankhau-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition">
+            Lưu Hồ Sơ Nhân Khẩu
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: XEM CHI TIẾT NHÂN KHẨU (THẺ DÂN CƯ ĐIỆN TỬ) -->
+  <div id="detail-nk-modal" class="modal-overlay">
+    <div class="modal-content max-w-lg">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-blue-900 text-white rounded-t-xl">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-lg">
+            <i class="fa-solid fa-id-badge"></i>
+          </div>
+          <div>
+            <h3 id="nk-detail-name" class="text-base font-bold">Hồ Sơ Cư Dân</h3>
+            <p id="nk-detail-sub" class="text-xs text-blue-200">Thông tin cơ sở dữ liệu dân cư</p>
+          </div>
+        </div>
+        <button onclick="closeModal('detail-nk-modal')" class="text-white/80 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4 text-xs">
+        <div class="grid grid-cols-2 gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <div>
+            <span class="text-slate-400 block mb-0.5">Số Căn cước công dân:</span>
+            <span id="nk-detail-cccd" class="font-mono font-bold text-slate-800 text-sm">--</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block mb-0.5">Ngày sinh / Tuổi:</span>
+            <span id="nk-detail-birth" class="font-bold text-slate-800 text-sm">--</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block mb-0.5">Giới tính:</span>
+            <span id="nk-detail-gender" class="font-semibold text-slate-800">--</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block mb-0.5">Quan hệ với chủ hộ:</span>
+            <span id="nk-detail-relation" class="font-bold text-blue-600">--</span>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Mã sổ hộ khẩu:</span>
+            <span id="nk-detail-maho" class="font-bold text-blue-700">--</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Địa chỉ cư trú:</span>
+            <span id="nk-detail-address" class="font-medium text-slate-800 text-right">--</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Số điện thoại:</span>
+            <span id="nk-detail-phone" class="font-semibold text-slate-800">--</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Nghề nghiệp:</span>
+            <span id="nk-detail-job" class="font-semibold text-slate-800">--</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Nơi làm việc / trường học:</span>
+            <span id="nk-detail-workplace" class="font-medium text-slate-800">--</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-500">Tình trạng cư trú:</span>
+            <span id="nk-detail-status" class="badge badge-success">--</span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-amber-50 rounded-lg border border-amber-200">
+          <span class="font-bold text-amber-800">Ghi chú hành chính:</span>
+          <p id="nk-detail-notes" class="text-amber-900 mt-1">Không có ghi chú thêm.</p>
+        </div>
+
+        <div class="flex justify-end pt-2">
+          <button onclick="closeModal('detail-nk-modal')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition">
+            Đóng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/services/hoKhauService.js"></script>
+  <script src="../js/services/nhanKhauService.js"></script>
+  <script src="../js/services/thuPhiService.js"></script>
+  <script src="../js/services/phanAnhService.js"></script>
+  <script src="../js/auth.js"></script>
+
+  <script>
+    // Nạp dropdown sổ hộ khẩu
+    function populateHouseholdDropdown() {
+      const hoList = hoKhauService.getAll();
+      const filterSelect = document.getElementById('filter-hokhau');
+      const formSelect = document.getElementById('form-ma-ho');
+
+      filterSelect.innerHTML = '<option value="all">-- Lọc theo Sổ Hộ Khẩu --</option>' + 
+        hoList.map(h => `<option value="${h.maHo}">${h.maHo} - ${h.chuHo}</option>`).join('');
+
+      formSelect.innerHTML = hoList.map(h => 
+        `<option value="${h.maHo}">${h.maHo} - ${h.chuHo} (${h.diaChi})</option>`
+      ).join('');
+    }
+
+    // Tải và hiển thị danh sách nhân khẩu
+    function loadResidentData() {
+      const kw = document.getElementById('search-input').value;
+      const maHo = document.getElementById('filter-hokhau').value;
+      const tinhTrang = document.getElementById('filter-cu-tru').value;
+      const gioiTinh = document.getElementById('filter-gioi-tinh').value;
+
+      const list = nhanKhauService.search(kw, maHo, tinhTrang, gioiTinh);
+      const stats = nhanKhauService.getStats();
+
+      // Cập nhật card chỉ số
+      document.getElementById('count-nk-total').textContent = stats.tongSoNhanKhau;
+      document.getElementById('count-nk-gender').textContent = `${stats.nam} / ${stats.nu}`;
+      document.getElementById('count-nk-thuong-tru').textContent = stats.thuongTru;
+      document.getElementById('count-nk-tam-tru-vang').textContent = `${stats.tamTru} / ${stats.tamVang}`;
+
+      const tbody = document.getElementById('nhankhau-table-body');
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center py-8 text-slate-400">Không tìm thấy nhân khẩu nào khớp với điều kiện tìm kiếm.</td></tr>`;
+        return;
+      }
+
+      const currentYear = 2026;
+
+      tbody.innerHTML = list.map(item => {
+        const birthYear = item.ngaySinh ? parseInt(item.ngaySinh.split('-')[0], 10) : 1990;
+        const age = currentYear - birthYear;
+
+        let badgeClass = 'badge-success';
+        if (item.tinhTrangCuTru === 'Tạm trú') badgeClass = 'badge-info';
+        else if (item.tinhTrangCuTru === 'Tạm vắng') badgeClass = 'badge-warning';
+
+        return `
+          <tr class="hover:bg-slate-50 transition border-b border-slate-100">
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0">
+                  ${item.hoTen.charAt(0)}
+                </div>
+                <div>
+                  <div class="font-bold text-slate-800">${item.hoTen}</div>
+                  <div class="text-[11px] text-slate-400">${item.soDienThoai || 'Chưa có SĐT'}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+                ${item.cccd || 'Chưa cấp'}
+              </span>
+            </td>
+            <td class="text-xs">
+              <span class="font-semibold text-slate-800">${item.ngaySinh || '--'}</span>
+              <span class="text-slate-400 text-[11px] block">(${age} tuổi)</span>
+            </td>
+            <td class="text-center">
+              <span class="text-xs font-semibold ${item.gioiTinh === 'Nam' ? 'text-blue-600' : 'text-rose-600'}">
+                ${item.gioiTinh}
+              </span>
+            </td>
+            <td>
+              <span class="font-bold text-slate-700 text-xs">${item.quanHeChuHo}</span>
+            </td>
+            <td>
+              <div class="font-semibold text-blue-700 text-xs">${item.maHo}</div>
+              <div class="text-[11px] text-slate-500 line-clamp-1">${item.diaChi}</div>
+            </td>
+            <td class="text-center">
+              <span class="badge ${badgeClass}">${item.tinhTrangCuTru}</span>
+            </td>
+            <td class="text-xs text-slate-600">
+              <div class="font-medium">${item.ngheNghiep || '--'}</div>
+              <div class="text-[10px] text-slate-400 line-clamp-1">${item.noiLamViec || ''}</div>
+            </td>
+            <td class="text-right whitespace-nowrap">
+              <button onclick="viewResidentDetail('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-md transition" title="Xem hồ sơ cư dân">
+                <i class="fa-solid fa-id-card"></i>
+              </button>
+              <button onclick="openEditModal('${item.id}')" class="p-1.5 text-amber-600 hover:bg-amber-50 rounded-md transition" title="Sửa thông tin">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button onclick="deleteResident('${item.id}', '${item.hoTen}')" class="p-1.5 text-rose-600 hover:bg-rose-50 rounded-md transition" title="Xóa nhân khẩu">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Modal helpers
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Mở modal thêm mới
+    function openCreateModal() {
+      document.getElementById('form-edit-id').value = '';
+      document.getElementById('modal-title').innerHTML = '<i class="fa-solid fa-user-plus text-blue-600"></i><span>Khai Báo Nhân Khẩu Mới</span>';
+      document.getElementById('nhankhau-form').reset();
+      openModal('nhankhau-modal');
+    }
+
+    // Mở modal chỉnh sửa
+    function openEditModal(id) {
+      const item = nhanKhauService.getById(id);
+      if (!item) return;
+
+      document.getElementById('form-edit-id').value = item.id;
+      document.getElementById('modal-title').innerHTML = '<i class="fa-solid fa-pen-to-square text-amber-600"></i><span>Sửa Thông Tin Nhân Khẩu</span>';
+
+      document.getElementById('form-ho-ten').value = item.hoTen;
+      document.getElementById('form-cccd').value = item.cccd || '';
+      document.getElementById('form-ngay-sinh').value = item.ngaySinh || '';
+      document.getElementById('form-gioi-tinh').value = item.gioiTinh;
+      document.getElementById('form-ma-ho').value = item.maHo;
+      document.getElementById('form-quan-he').value = item.quanHeChuHo;
+      document.getElementById('form-dia-chi').value = item.diaChi;
+      document.getElementById('form-sdt').value = item.soDienThoai || '';
+      document.getElementById('form-tinh-trang').value = item.tinhTrangCuTru;
+      document.getElementById('form-nghe-nghiep').value = item.ngheNghiep || '';
+      document.getElementById('form-noi-lam-viec').value = item.noiLamViec || '';
+      document.getElementById('form-ghi-chu').value = item.ghiChu || '';
+
+      openModal('nhankhau-modal');
+    }
+
+    // Xử lý gửi form
+    document.getElementById('nhankhau-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const editId = document.getElementById('form-edit-id').value;
+
+      const data = {
+        hoTen: document.getElementById('form-ho-ten').value.trim(),
+        cccd: document.getElementById('form-cccd').value.trim(),
+        ngaySinh: document.getElementById('form-ngay-sinh').value,
+        gioiTinh: document.getElementById('form-gioi-tinh').value,
+        maHo: document.getElementById('form-ma-ho').value,
+        quanHeChuHo: document.getElementById('form-quan-he').value,
+        diaChi: document.getElementById('form-dia-chi').value.trim(),
+        soDienThoai: document.getElementById('form-sdt').value.trim(),
+        tinhTrangCuTru: document.getElementById('form-tinh-trang').value,
+        ngheNghiep: document.getElementById('form-nghe-nghiep').value.trim(),
+        noiLamViec: document.getElementById('form-noi-lam-viec').value.trim(),
+        ghiChu: document.getElementById('form-ghi-chu').value.trim()
+      };
+
+      if (editId) {
+        nhanKhauService.update(editId, data);
+      } else {
+        nhanKhauService.create(data);
+      }
+
+      closeModal('nhankhau-modal');
+      loadResidentData();
+    });
+
+    // Xem chi tiết
+    function viewResidentDetail(id) {
+      const item = nhanKhauService.getById(id);
+      if (!item) return;
+
+      const currentYear = 2026;
+      const birthYear = item.ngaySinh ? parseInt(item.ngaySinh.split('-')[0], 10) : 1990;
+      const age = currentYear - birthYear;
+
+      document.getElementById('nk-detail-name').textContent = item.hoTen;
+      document.getElementById('nk-detail-sub').textContent = `${item.tinhTrangCuTru} · Thuộc ${item.maHo}`;
+      document.getElementById('nk-detail-cccd').textContent = item.cccd || 'Chưa cập nhật';
+      document.getElementById('nk-detail-birth').textContent = `${item.ngaySinh || '--'} (${age} tuổi)`;
+      document.getElementById('nk-detail-gender').textContent = item.gioiTinh;
+      document.getElementById('nk-detail-relation').textContent = item.quanHeChuHo;
+      document.getElementById('nk-detail-maho').textContent = item.maHo;
+      document.getElementById('nk-detail-address').textContent = item.diaChi;
+      document.getElementById('nk-detail-phone').textContent = item.soDienThoai || 'Chưa có';
+      document.getElementById('nk-detail-job').textContent = item.ngheNghiep || 'Tự do';
+      document.getElementById('nk-detail-workplace').textContent = item.noiLamViec || 'Chưa cập nhật';
+      
+      const statusBadge = document.getElementById('nk-detail-status');
+      statusBadge.textContent = item.tinhTrangCuTru;
+      statusBadge.className = `badge ${item.tinhTrangCuTru === 'Thường trú' ? 'badge-success' : item.tinhTrangCuTru === 'Tạm trú' ? 'badge-info' : 'badge-warning'}`;
+
+      document.getElementById('nk-detail-notes').textContent = item.ghiChu || 'Không có ghi chú thêm.';
+
+      openModal('detail-nk-modal');
+    }
+
+    // Xóa nhân khẩu
+    function deleteResident(id, name) {
+      if (confirm(`Đồng chí có chắc chắn muốn xóa nhân khẩu: "${name}" khỏi cơ sở dữ liệu?`)) {
+        nhanKhauService.delete(id);
+        loadResidentData();
+      }
+    }
+
+    // Xuất CSV
+    function exportCSV() {
+      const list = nhanKhauService.getAll();
+      let csv = "Họ và Tên,CCCD,Ngày Sinh,Giới Tính,Quan Hệ Chủ Hộ,Mã Hộ,Địa Chỉ,Số Điện Thoại,Nghề Nghiệp,Tình Trạng Cư Trú\n";
+      list.forEach(i => {
+        csv += `"${i.hoTen}","${i.cccd || ''}","${i.ngaySinh}","${i.gioiTinh}","${i.quanHeChuHo}","${i.maHo}","${i.diaChi}","${i.soDienThoai || ''}","${i.ngheNghiep || ''}","${i.tinhTrangCuTru}"\n`;
+      });
+
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Danh_sach_cu_dan_TDP5_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Lắng nghe sự kiện
+    document.getElementById('search-input').addEventListener('input', loadResidentData);
+    document.getElementById('filter-hokhau').addEventListener('change', loadResidentData);
+    document.getElementById('filter-cu-tru').addEventListener('change', loadResidentData);
+    document.getElementById('filter-gioi-tinh').addEventListener('change', loadResidentData);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      populateHouseholdDropdown();
+      loadResidentData();
+    });
+  </script>
+</body>
+</html>

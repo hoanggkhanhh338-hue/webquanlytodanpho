@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Sổ Hộ Khẩu - Tổ Dân Phố Số 5</title>
+  <meta name="description" content="Danh sách sổ hộ khẩu, thêm mới và quản lý tạm trú, tạm vắng tổ dân phố số 5.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+  <div class="app-container">
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- SIDEBAR BÊN TRÁI -->
+    <aside id="app-sidebar" class="sidebar">
+      <div class="p-5 border-b border-slate-700/60 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-blue-500/30">
+          <i class="fa-solid fa-landmark-flag"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold text-white tracking-wide uppercase leading-tight">Tổ Dân Phố Số 5</h2>
+          <p class="text-[11px] text-slate-400">P. Dịch Vọng Hậu · Cầu Giấy</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 py-4 space-y-1 overflow-y-auto">
+        <a href="../index.html" class="nav-item">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Bảng điều khiển</span>
+        </a>
+
+        <a href="ho-khau.html" class="nav-item active">
+          <i class="fa-solid fa-address-book"></i>
+          <span>Sổ Hộ Khẩu</span>
+        </a>
+
+        <a href="nhan-khau.html" class="nav-item">
+          <i class="fa-solid fa-users"></i>
+          <span>Cư Dân / Nhân Khẩu</span>
+        </a>
+
+        <a href="thu-phi.html" class="nav-item">
+          <i class="fa-solid fa-money-check-dollar"></i>
+          <span>Thu Phí & Quỹ Đóng Góp</span>
+        </a>
+
+        <a href="phan-anh.html" class="nav-item">
+          <i class="fa-solid fa-comments"></i>
+          <span>Phản Ánh & Kiến Nghị</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Hệ Thống & Báo Cáo</div>
+        </div>
+
+        <a href="#" onclick="alert('Tính năng liên thông VNeID hoạt động chuẩn mực.'); return false;" class="nav-item text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Kết Nối VNeID</span>
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-700/60 bg-slate-900/40">
+        <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Dữ liệu TDP5 đồng bộ</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Quản lý Hộ tịch & Cư trú</p>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <div class="main-content">
+      <!-- TOP NAVBAR -->
+      <header class="top-navbar">
+        <div class="flex items-center gap-3">
+          <button id="sidebar-toggle-btn" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Menu">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+          <div>
+            <h1 class="text-base font-bold text-slate-800 leading-tight">Quản Lý Sổ Hộ Khẩu & Tạm Trú</h1>
+            <p class="text-xs text-slate-500 hidden sm:block">Danh sách các hộ gia đình thường trú và tạm trú tại Tổ dân phố số 5</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2.5 pl-3 border-l border-slate-200">
+            <img id="navbar-user-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-slate-300">
+            <div class="hidden md:block text-left">
+              <div id="navbar-user-name" class="text-xs font-bold text-slate-800">Nguyễn Văn Hưng</div>
+              <div id="navbar-user-role" class="text-[11px] text-blue-600 font-semibold">Tổ trưởng TDP 5</div>
+            </div>
+            <button id="navbar-logout-btn" class="ml-1 p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition text-xs font-semibold" title="Đăng xuất">
+              <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE CONTENT -->
+      <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6">
+
+        <!-- Top summary cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Tổng Số Hộ</span>
+            <div id="count-total" class="text-2xl font-bold text-blue-900 mt-1">8</div>
+            <span class="text-[11px] text-blue-600 font-medium">Toàn địa bàn tổ 5</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Hộ Thường Trú</span>
+            <div id="count-thuong-tru" class="text-2xl font-bold text-emerald-700 mt-1">5</div>
+            <span class="text-[11px] text-emerald-600 font-medium">Định cư lâu năm</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Hộ Tạm Trú</span>
+            <div id="count-tam-tru" class="text-2xl font-bold text-amber-700 mt-1">3</div>
+            <span class="text-[11px] text-amber-600 font-medium">Thuê nhà, làm việc</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-bold text-slate-500 uppercase">Tổng Nhân Khẩu Thuộc Hộ</span>
+            <div id="count-nhan-khau" class="text-2xl font-bold text-indigo-700 mt-1">27</div>
+            <span class="text-[11px] text-indigo-600 font-medium">Bình quân 3.4 người/hộ</span>
+          </div>
+        </div>
+
+        <!-- Filter bar & Action Buttons -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <!-- Search input -->
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+              </span>
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Tìm theo Mã sổ HK, Tên chủ hộ, Số CCCD, Địa chỉ..." 
+                class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs md:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition"
+              >
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="filter-loai-cu-tru" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Tất cả loại cư trú --</option>
+                <option value="Thường trú">Thường trú</option>
+                <option value="Tạm trú">Tạm trú</option>
+              </select>
+
+              <select id="filter-khu-vuc" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Tất cả khu vực / cụm --</option>
+                <option value="Cụm 1 - Phố Phan Văn Trường">Cụm 1 - Phan Văn Trường</option>
+                <option value="Cụm 2 - Phố Trần Quốc Vượng">Cụm 2 - Trần Quốc Vượng</option>
+                <option value="Cụm 3 - Ngõ 20 Dịch Vọng Hậu">Cụm 3 - Dịch Vọng Hậu</option>
+              </select>
+
+              <!-- Add new household button -->
+              <button onclick="openCreateModal()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+                <i class="fa-solid fa-plus"></i>
+                <span>Thêm Sổ Hộ Khẩu</span>
+              </button>
+
+              <!-- Export CSV -->
+              <button onclick="exportCSV()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition" title="Xuất dữ liệu Excel/CSV">
+                <i class="fa-solid fa-file-excel text-emerald-600"></i>
+                <span class="hidden sm:inline">Xuất Danh Sách</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Household Data Table -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="table-responsive">
+            <table class="custom-table text-left">
+              <thead>
+                <tr>
+                  <th class="w-24">Mã Hộ</th>
+                  <th>Chủ Hộ Gia Đình</th>
+                  <th>Địa Chỉ Cư Trú</th>
+                  <th>Cụm Dân Cư</th>
+                  <th class="text-center">Loại Cư Trú</th>
+                  <th class="text-center">Số Thành Viên</th>
+                  <th>Ngày Cấp Sổ</th>
+                  <th class="text-right">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody id="hokhau-table-body" class="divide-y divide-slate-100">
+                <!-- Nạp tự động qua JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL 1: THÊM HOẶC SỬA SỔ HỘ KHẨU -->
+  <div id="hokhau-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50 rounded-t-xl">
+        <h3 id="modal-title" class="text-base font-bold text-slate-800 flex items-center gap-2">
+          <i class="fa-solid fa-address-book text-blue-600"></i>
+          <span>Thêm Sổ Hộ Khẩu Mới</span>
+        </h3>
+        <button onclick="closeModal('hokhau-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="hokhau-form" class="p-5 space-y-4">
+        <input type="hidden" id="form-edit-id">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mã Sổ Hộ Khẩu (*)</label>
+            <input type="text" id="form-ma-ho" required placeholder="HK-05-009" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Họ Và Tên Chủ Hộ (*)</label>
+            <input type="text" id="form-chu-ho" required placeholder="Nguyễn Văn A" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số Căn Cước Công Dân (CCCD)</label>
+            <input type="text" id="form-cccd" placeholder="00108000xxxx (12 số)" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số Điện Thoại Liên Hệ</label>
+            <input type="tel" id="form-sdt" placeholder="09xxxxxxxx" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Địa Chỉ Chi Tiết (Số nhà, ngõ, ngách) (*)</label>
+            <input type="text" id="form-dia-chi" required placeholder="Số nhà ..., Ngõ 48 Phan Văn Trường" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Cụm Dân Cư Phụ Trách</label>
+            <select id="form-khu-vuc" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Cụm 1 - Phố Phan Văn Trường">Cụm 1 - Phố Phan Văn Trường</option>
+              <option value="Cụm 2 - Phố Trần Quốc Vượng">Cụm 2 - Phố Trần Quốc Vượng</option>
+              <option value="Cụm 3 - Ngõ 20 Dịch Vọng Hậu">Cụm 3 - Ngõ 20 Dịch Vọng Hậu</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Loại Cư Trú (*)</label>
+            <select id="form-loai-cu-tru" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Thường trú">Thường trú</option>
+              <option value="Tạm trú">Tạm trú</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số Thành Viên Trong Hộ</label>
+            <input type="number" id="form-so-thanh-vien" min="1" value="1" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Ngày Cấp Sổ / Đăng Ký</label>
+            <input type="date" id="form-ngay-cap" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Ghi Chú Hoặc Thông Tin Bổ Sung</label>
+            <textarea id="form-ghi-chu" rows="2" placeholder="Ghi chú về diện gia đình chính sách, người có công, hoàn cảnh đặc biệt..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white"></textarea>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal('hokhau-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition">
+            Lưu Sổ Hộ Khẩu
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: XEM CHI TIẾT SỔ HỘ KHẨU VÀ THÀNH VIÊN -->
+  <div id="detail-modal" class="modal-overlay">
+    <div class="modal-content max-w-2xl">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-blue-900 text-white rounded-t-xl">
+        <div>
+          <h3 id="detail-household-name" class="text-base font-bold">Chi Tiết Sổ Hộ Khẩu: HK-05-001</h3>
+          <p id="detail-household-address" class="text-xs text-blue-200">Số nhà 12, Ngõ 48 Phan Văn Trường</p>
+        </div>
+        <button onclick="closeModal('detail-modal')" class="text-white/80 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-5">
+        <!-- Household General Info Box -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+          <div>
+            <span class="text-slate-500 font-medium block">Chủ hộ:</span>
+            <span id="detail-chu-ho" class="font-bold text-slate-800 text-sm">--</span>
+          </div>
+          <div>
+            <span class="text-slate-500 font-medium block">Số CCCD:</span>
+            <span id="detail-cccd" class="font-semibold text-slate-700">--</span>
+          </div>
+          <div>
+            <span class="text-slate-500 font-medium block">Điện thoại:</span>
+            <span id="detail-sdt" class="font-semibold text-slate-700">--</span>
+          </div>
+          <div>
+            <span class="text-slate-500 font-medium block">Loại cư trú:</span>
+            <span id="detail-loai" class="badge badge-info">--</span>
+          </div>
+        </div>
+
+        <!-- Family members list -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-users-line text-blue-600"></i>
+              Danh Sách Nhân Khẩu Trong Hộ (<span id="detail-member-count">0</span>)
+            </h4>
+            <a href="nhan-khau.html" class="text-xs text-blue-600 hover:underline font-semibold">
+              + Thêm người vào hộ
+            </a>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg overflow-hidden">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-100 text-slate-600 font-semibold border-b border-slate-200">
+                <tr>
+                  <th class="p-2.5">Họ và tên</th>
+                  <th class="p-2.5">Quan hệ</th>
+                  <th class="p-2.5">Năm sinh</th>
+                  <th class="p-2.5">Giới tính</th>
+                  <th class="p-2.5">Số CCCD</th>
+                  <th class="p-2.5">Nghề nghiệp</th>
+                </tr>
+              </thead>
+              <tbody id="detail-members-body" class="divide-y divide-slate-100">
+                <!-- Nạp tự động -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Note box -->
+        <div class="p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs">
+          <span class="font-bold text-amber-800">Ghi chú quản lý:</span>
+          <span id="detail-ghi-chu" class="text-amber-900 ml-1">Không có</span>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-print"></i> In Trích Lục Hộ Khẩu
+          </button>
+          <button onclick="closeModal('detail-modal')" class="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-700 transition">
+            Đóng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/services/hoKhauService.js"></script>
+  <script src="../js/services/nhanKhauService.js"></script>
+  <script src="../js/services/thuPhiService.js"></script>
+  <script src="../js/services/phanAnhService.js"></script>
+  <script src="../js/auth.js"></script>
+
+  <script>
+    // Tải và hiển thị danh sách hộ khẩu
+    function loadHouseholdData() {
+      const kw = document.getElementById('search-input').value;
+      const loaiCuTru = document.getElementById('filter-loai-cu-tru').value;
+      const khuVuc = document.getElementById('filter-khu-vuc').value;
+
+      const list = hoKhauService.search(kw, loaiCuTru, khuVuc);
+      const stats = hoKhauService.getStats();
+
+      // Cập nhật thẻ thống kê
+      document.getElementById('count-total').textContent = stats.tongSoHo;
+      document.getElementById('count-thuong-tru').textContent = stats.thuongTru;
+      document.getElementById('count-tam-tru').textContent = stats.tamTru;
+      document.getElementById('count-nhan-khau').textContent = stats.tongNhanKhau;
+
+      const tbody = document.getElementById('hokhau-table-body');
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400">Không tìm thấy hộ khẩu nào phù hợp với điều kiện tìm kiếm.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(item => {
+        const isThuongTru = item.loaiCuTru === 'Thường trú';
+        const badgeClass = isThuongTru ? 'badge-success' : 'badge-warning';
+
+        return `
+          <tr class="hover:bg-slate-50 transition border-b border-slate-100">
+            <td class="font-bold text-blue-700 text-xs">${item.maHo}</td>
+            <td>
+              <div class="font-bold text-slate-800">${item.chuHo}</div>
+              <div class="text-[11px] text-slate-500">
+                <i class="fa-solid fa-id-card text-slate-400 mr-1"></i>${item.cccdChuHo || 'Chưa cập nhật CCCD'}
+                ${item.soDienThoai ? `· <i class="fa-solid fa-phone text-slate-400 mr-1"></i>${item.soDienThoai}` : ''}
+              </div>
+            </td>
+            <td>
+              <div class="text-slate-800 line-clamp-1">${item.diaChi}</div>
+            </td>
+            <td>
+              <span class="text-xs text-slate-600">${item.khuVuc}</span>
+            </td>
+            <td class="text-center">
+              <span class="badge ${badgeClass}">${item.loaiCuTru}</span>
+            </td>
+            <td class="text-center font-bold text-slate-700">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100">
+                ${item.soThanhVien || 1} người
+              </span>
+            </td>
+            <td class="text-xs text-slate-500">${item.ngayCap || '--'}</td>
+            <td class="text-right whitespace-nowrap">
+              <button onclick="viewHouseholdDetail('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-md transition" title="Xem chi tiết thành viên">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button onclick="openEditModal('${item.id}')" class="p-1.5 text-amber-600 hover:bg-amber-50 rounded-md transition" title="Sửa thông tin hộ">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button onclick="deleteHousehold('${item.id}', '${item.chuHo}')" class="p-1.5 text-rose-600 hover:bg-rose-50 rounded-md transition" title="Xóa hộ khẩu">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Modal Control
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Thêm mới
+    function openCreateModal() {
+      document.getElementById('form-edit-id').value = '';
+      document.getElementById('modal-title').innerHTML = '<i class="fa-solid fa-address-book text-blue-600"></i><span>Thêm Sổ Hộ Khẩu Mới</span>';
+      document.getElementById('hokhau-form').reset();
+      
+      const count = hoKhauService.getAll().length + 1;
+      document.getElementById('form-ma-ho').value = `HK-05-${String(count).padStart(3, '0')}`;
+      document.getElementById('form-ngay-cap').value = new Date().toISOString().split('T')[0];
+      
+      openModal('hokhau-modal');
+    }
+
+    // Chỉnh sửa
+    function openEditModal(id) {
+      const item = hoKhauService.getById(id);
+      if (!item) return;
+
+      document.getElementById('form-edit-id').value = item.id;
+      document.getElementById('modal-title').innerHTML = '<i class="fa-solid fa-pen-to-square text-amber-600"></i><span>Cập Nhật Sổ Hộ Khẩu</span>';
+      
+      document.getElementById('form-ma-ho').value = item.maHo;
+      document.getElementById('form-chu-ho').value = item.chuHo;
+      document.getElementById('form-cccd').value = item.cccdChuHo || '';
+      document.getElementById('form-sdt').value = item.soDienThoai || '';
+      document.getElementById('form-dia-chi').value = item.diaChi;
+      document.getElementById('form-khu-vuc').value = item.khuVuc;
+      document.getElementById('form-loai-cu-tru').value = item.loaiCuTru;
+      document.getElementById('form-so-thanh-vien').value = item.soThanhVien || 1;
+      document.getElementById('form-ngay-cap').value = item.ngayCap || '';
+      document.getElementById('form-ghi-chu').value = item.ghiChu || '';
+
+      openModal('hokhau-modal');
+    }
+
+    // Xử lý lưu form
+    document.getElementById('hokhau-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const editId = document.getElementById('form-edit-id').value;
+
+      const data = {
+        maHo: document.getElementById('form-ma-ho').value.trim(),
+        chuHo: document.getElementById('form-chu-ho').value.trim(),
+        cccdChuHo: document.getElementById('form-cccd').value.trim(),
+        soDienThoai: document.getElementById('form-sdt').value.trim(),
+        diaChi: document.getElementById('form-dia-chi').value.trim(),
+        khuVuc: document.getElementById('form-khu-vuc').value,
+        loaiCuTru: document.getElementById('form-loai-cu-tru').value,
+        soThanhVien: parseInt(document.getElementById('form-so-thanh-vien').value, 10) || 1,
+        ngayCap: document.getElementById('form-ngay-cap').value,
+        ghiChu: document.getElementById('form-ghi-chu').value.trim()
+      };
+
+      if (editId) {
+        hoKhauService.update(editId, data);
+      } else {
+        hoKhauService.create(data);
+      }
+
+      closeModal('hokhau-modal');
+      loadHouseholdData();
+    });
+
+    // Xem chi tiết
+    function viewHouseholdDetail(id) {
+      const item = hoKhauService.getById(id);
+      if (!item) return;
+
+      document.getElementById('detail-household-name').textContent = `Sổ Hộ Khẩu: ${item.maHo} (${item.chuHo})`;
+      document.getElementById('detail-household-address').textContent = item.diaChi;
+      document.getElementById('detail-chu-ho').textContent = item.chuHo;
+      document.getElementById('detail-cccd').textContent = item.cccdChuHo || 'Chưa có';
+      document.getElementById('detail-sdt').textContent = item.soDienThoai || 'Chưa có';
+      
+      const badgeEl = document.getElementById('detail-loai');
+      badgeEl.textContent = item.loaiCuTru;
+      badgeEl.className = `badge ${item.loaiCuTru === 'Thường trú' ? 'badge-success' : 'badge-warning'}`;
+      
+      document.getElementById('detail-ghi-chu').textContent = item.ghiChu || 'Không có ghi chú thêm.';
+
+      // Tải danh sách thành viên thuộc mã hộ này
+      const members = nhanKhauService.getByMaHo(item.maHo);
+      document.getElementById('detail-member-count').textContent = members.length;
+
+      const membersBody = document.getElementById('detail-members-body');
+      if (members.length === 0) {
+        membersBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-slate-400">Chưa có thành viên nào được khai báo trong hộ này. Hãy vào mục Nhân khẩu để thêm.</td></tr>`;
+      } else {
+        membersBody.innerHTML = members.map(m => `
+          <tr class="hover:bg-slate-50">
+            <td class="p-2.5 font-semibold text-slate-800">${m.hoTen}</td>
+            <td class="p-2.5 text-blue-600 font-medium">${m.quanHeChuHo}</td>
+            <td class="p-2.5">${m.ngaySinh || '--'}</td>
+            <td class="p-2.5">${m.gioiTinh}</td>
+            <td class="p-2.5 text-slate-600 font-mono">${m.cccd || '--'}</td>
+            <td class="p-2.5 text-slate-600">${m.ngheNghiep || '--'}</td>
+          </tr>
+        `).join('');
+      }
+
+      openModal('detail-modal');
+    }
+
+    // Xóa hộ khẩu
+    function deleteHousehold(id, name) {
+      if (confirm(`Đồng chí có chắc chắn muốn xóa Sổ Hộ Khẩu của chủ hộ: "${name}"? Thao tác này sẽ lưu trữ hồ sơ theo quy định.`)) {
+        hoKhauService.delete(id);
+        loadHouseholdData();
+      }
+    }
+
+    // Xuất file CSV
+    function exportCSV() {
+      const list = hoKhauService.getAll();
+      let csv = "Mã Hộ,Chủ Hộ,CCCD,Số Điện Thoại,Địa Chỉ,Cụm Dân Cư,Loại Cư Trú,Số Thành Viên,Ngày Cấp\n";
+      list.forEach(i => {
+        csv += `"${i.maHo}","${i.chuHo}","${i.cccdChuHo || ''}","${i.soDienThoai || ''}","${i.diaChi}","${i.khuVuc}","${i.loaiCuTru}","${i.soThanhVien}","${i.ngayCap}"\n`;
+      });
+
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Danh_sach_ho_khau_TDP5_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Lắng nghe sự kiện tìm kiếm & lọc
+    document.getElementById('search-input').addEventListener('input', loadHouseholdData);
+    document.getElementById('filter-loai-cu-tru').addEventListener('change', loadHouseholdData);
+    document.getElementById('filter-khu-vuc').addEventListener('change', loadHouseholdData);
+
+    // Khởi tạo
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHouseholdData();
+    });
+  </script>
+</body>
+</html>

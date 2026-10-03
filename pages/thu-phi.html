@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Thu Phí & Quỹ Đóng Góp - Tổ Dân Phố Số 5</title>
+  <meta name="description" content="Quản lý danh mục các khoản phí vệ sinh môi trường, quỹ đền ơn đáp nghĩa và tiến độ thu nộp của từng hộ.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+  <div class="app-container">
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- SIDEBAR BÊN TRÁI -->
+    <aside id="app-sidebar" class="sidebar">
+      <div class="p-5 border-b border-slate-700/60 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-blue-500/30">
+          <i class="fa-solid fa-landmark-flag"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold text-white tracking-wide uppercase leading-tight">Tổ Dân Phố Số 5</h2>
+          <p class="text-[11px] text-slate-400">P. Dịch Vọng Hậu · Cầu Giấy</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 py-4 space-y-1 overflow-y-auto">
+        <a href="../index.html" class="nav-item">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Bảng điều khiển</span>
+        </a>
+
+        <a href="ho-khau.html" class="nav-item">
+          <i class="fa-solid fa-address-book"></i>
+          <span>Sổ Hộ Khẩu</span>
+        </a>
+
+        <a href="nhan-khau.html" class="nav-item">
+          <i class="fa-solid fa-users"></i>
+          <span>Cư Dân / Nhân Khẩu</span>
+        </a>
+
+        <a href="thu-phi.html" class="nav-item active">
+          <i class="fa-solid fa-money-check-dollar"></i>
+          <span>Thu Phí & Quỹ Đóng Góp</span>
+        </a>
+
+        <a href="phan-anh.html" class="nav-item">
+          <i class="fa-solid fa-comments"></i>
+          <span>Phản Ánh & Kiến Nghị</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Hệ Thống & Báo Cáo</div>
+        </div>
+
+        <a href="#" onclick="alert('Tính năng liên kết tài khoản ngân hàng Kho bạc / Vietcombank TDP số 5 an toàn.'); return false;" class="nav-item text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>Cổng Thanh Toán QR</span>
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-700/60 bg-slate-900/40">
+        <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Sổ quỹ công khai minh bạch</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Tổ Dân Phố Số 5</p>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <div class="main-content">
+      <!-- TOP NAVBAR -->
+      <header class="top-navbar">
+        <div class="flex items-center gap-3">
+          <button id="sidebar-toggle-btn" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Menu">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+          <div>
+            <h1 class="text-base font-bold text-slate-800 leading-tight">Quản Lý Thu Phí & Các Quỹ Đóng Góp</h1>
+            <p class="text-xs text-slate-500 hidden sm:block">Theo dõi tiến độ nộp phí vệ sinh môi trường, quỹ đền ơn đáp nghĩa và an sinh xã hội</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2.5 pl-3 border-l border-slate-200">
+            <img id="navbar-user-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-slate-300">
+            <div class="hidden md:block text-left">
+              <div id="navbar-user-name" class="text-xs font-bold text-slate-800">Nguyễn Văn Hưng</div>
+              <div id="navbar-user-role" class="text-[11px] text-blue-600 font-semibold">Tổ trưởng TDP 5</div>
+            </div>
+            <button id="navbar-logout-btn" class="ml-1 p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition text-xs font-semibold" title="Đăng xuất">
+              <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE CONTENT -->
+      <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6">
+
+        <!-- 4 KPI Summary Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-emerald-600">
+            <span class="text-xs font-bold text-slate-500 uppercase">Tổng Thực Thu</span>
+            <div id="stat-tong-da-thu" class="text-xl md:text-2xl font-bold text-emerald-700 mt-1">6.840.000 ₫</div>
+            <span class="text-[11px] text-emerald-600 font-medium">Đã vào tài khoản quỹ</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-blue-600">
+            <span class="text-xs font-bold text-slate-500 uppercase">Kế Hoạch Dự Kiến</span>
+            <div id="stat-tong-ke-hoach" class="text-xl md:text-2xl font-bold text-blue-900 mt-1">8.640.000 ₫</div>
+            <span id="stat-ty-le" class="text-[11px] text-blue-600 font-medium">Đạt 79% chỉ tiêu</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-teal-600">
+            <span class="text-xs font-bold text-slate-500 uppercase">Hộ Đã Nộp Đủ</span>
+            <div id="stat-ho-da-nop" class="text-2xl font-bold text-teal-700 mt-1">9</div>
+            <span class="text-[11px] text-teal-600 font-medium">Biên lai điện tử hợp lệ</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-amber-500">
+            <span class="text-xs font-bold text-slate-500 uppercase">Hộ Chưa Nộp / Nợ</span>
+            <div id="stat-ho-chua-nop" class="text-2xl font-bold text-amber-700 mt-1">3</div>
+            <span class="text-[11px] text-amber-600 font-medium">Cần đôn đốc nhắc nhở</span>
+          </div>
+        </div>
+
+        <!-- TAB NAVIGATION -->
+        <div class="flex items-center justify-between border-b border-slate-200">
+          <div class="flex gap-2">
+            <button id="tab-records-btn" onclick="switchTab('records')" class="pb-3 px-3 text-xs md:text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition flex items-center gap-2">
+              <i class="fa-solid fa-list-check"></i>
+              <span>Theo Dõi Nộp Phí Từng Hộ</span>
+            </button>
+            <button id="tab-categories-btn" onclick="switchTab('categories')" class="pb-3 px-3 text-xs md:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2">
+              <i class="fa-solid fa-tags"></i>
+              <span>Danh Mục Các Khoản Thu & Quỹ</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2 pb-2">
+            <button onclick="openCollectModal()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+              <i class="fa-solid fa-receipt"></i>
+              <span>Ghi Nhận Đóng Tiền</span>
+            </button>
+
+            <button onclick="openAddCategoryModal()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+              <i class="fa-solid fa-plus"></i>
+              <span>Thêm Khoản Thu</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 1: DANH SÁCH BẢN GHI THEO DÕI NỘP PHÍ -->
+        <div id="view-records" class="space-y-4">
+          <!-- Filters -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+              </span>
+              <input 
+                type="text" 
+                id="search-record-input" 
+                placeholder="Tìm theo Tên chủ hộ, Mã hộ, Mã biên lai, Địa chỉ..." 
+                class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs md:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white"
+              >
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="filter-khoan-thu" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Tất cả khoản thu / Quỹ --</option>
+              </select>
+
+              <select id="filter-trang-thai" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Tất cả trạng thái --</option>
+                <option value="Đã nộp">Đã nộp đủ</option>
+                <option value="Chưa nộp">Chưa nộp</option>
+                <option value="Nộp thiếu">Nộp thiếu</option>
+                <option value="Miễn giảm">Diện miễn giảm</option>
+              </select>
+
+              <button onclick="exportFeeCSV()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
+                <i class="fa-solid fa-file-excel text-emerald-600"></i>
+                <span class="hidden sm:inline">Xuất Báo Cáo</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="table-responsive">
+              <table class="custom-table text-left">
+                <thead>
+                  <tr>
+                    <th>Mã Hộ</th>
+                    <th>Chủ Hộ Gia Đình</th>
+                    <th>Khoản Thu / Quỹ</th>
+                    <th class="text-right">Mức Phải Nộp</th>
+                    <th class="text-right">Số Tiền Đã Nộp</th>
+                    <th class="text-center">Trạng Thái</th>
+                    <th>Ngày Nộp</th>
+                    <th>Hình Thức / Mã BL</th>
+                    <th class="text-right">Thao Tác</th>
+                  </tr>
+                </thead>
+                <tbody id="records-table-body" class="divide-y divide-slate-100">
+                  <!-- Nạp tự động -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: DANH MỤC CÁC KHOẢN THU & QUỸ -->
+        <div id="view-categories" class="hidden space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="categories-grid">
+            <!-- Nạp tự động các thẻ khoản thu -->
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL 1: GHI NHẬN THU PHÍ NHANH -->
+  <div id="collect-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-emerald-700 text-white rounded-t-xl">
+        <h3 class="text-base font-bold flex items-center gap-2">
+          <i class="fa-solid fa-receipt"></i>
+          <span>Ghi Nhận Nộp Tiền / Xuất Biên Lai</span>
+        </h3>
+        <button onclick="closeModal('collect-modal')" class="text-white/80 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="collect-form" class="p-5 space-y-4">
+        <input type="hidden" id="form-record-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Chọn Bản Ghi Thu Hoặc Hộ Cần Nộp (*)</label>
+          <select id="form-select-record" required class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white">
+            <!-- Tự động nạp -->
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số Tiền Đóng Nộp (VNĐ) (*)</label>
+            <input type="number" id="form-amount" required step="10000" min="0" placeholder="720000" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white font-bold text-slate-900">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Phương Thức Thanh Toán (*)</label>
+            <select id="form-method" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white">
+              <option value="Chuyển khoản QR">Chuyển khoản QR (VietQR / Ngân hàng)</option>
+              <option value="Tiền mặt">Tiền mặt trực tiếp cho Cán bộ</option>
+              <option value="Chính sách">Chính sách (Miễn giảm diện hộ nghèo / liệt sĩ)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Cán Bộ Tiếp Nhận Thu</label>
+            <input type="text" id="form-collector" value="Nguyễn Văn Hưng (Tổ trưởng)" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Ngày Thu</label>
+            <input type="date" id="form-collect-date" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Ghi Chú Trên Biên Lai</label>
+            <input type="text" id="form-collect-notes" placeholder="Ghi chú số giao dịch ngân hàng, nộp đợt 1, đóng trước hạn..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white">
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal('collect-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow transition">
+            Xác Nhận Nộp Tiền & Tạo Biên Lai
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: THÊM KHOẢN THU MỚI -->
+  <div id="category-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-blue-900 text-white rounded-t-xl">
+        <h3 class="text-base font-bold flex items-center gap-2">
+          <i class="fa-solid fa-plus-circle"></i>
+          <span>Thêm Khoản Thu / Quỹ Mới</span>
+        </h3>
+        <button onclick="closeModal('category-modal')" class="text-white/80 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="category-form" class="p-5 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Tên Khoản Thu / Tên Quỹ (*)</label>
+          <input type="text" id="cat-name" required placeholder="Ví dụ: Quỹ Khuyến học & Tết Thiếu nhi 2026" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Loại Khoản Thu (*)</label>
+            <select id="cat-type" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Bắt buộc">Bắt buộc theo quy định</option>
+              <option value="Vận động tự nguyện">Vận động tự nguyện</option>
+              <option value="Bắt buộc cơ sở">Bắt buộc cơ sở (Nghị quyết TDP)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mức Thu Dự Kiến (VNĐ) (*)</label>
+            <input type="number" id="cat-amount" required step="10000" min="0" placeholder="100000" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white font-bold">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Đơn Vị Tính</label>
+            <input type="text" id="cat-unit" value="đồng/hộ" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Hạn Cuối Đóng Nộp</label>
+            <input type="date" id="cat-deadline" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mục Đích & Căn Cứ Thu</label>
+            <textarea id="cat-desc" rows="2" placeholder="Ghi rõ căn cứ quyết định UBND quận/phường hoặc Nghị quyết cuộc họp chi bộ tổ dân phố..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white"></textarea>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal('category-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition">
+            Lưu & Phổ Biến Đến Các Hộ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: BIÊN LAI THU TIỀN ĐIỆN TỬ (IN ẤN CHUẨN MỰC) -->
+  <div id="receipt-modal" class="modal-overlay">
+    <div class="modal-content max-w-xl">
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between no-print">
+        <h3 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+          <i class="fa-solid fa-receipt text-emerald-600"></i>
+          Biên Lai Thu Tiền Điện Tử
+        </h3>
+        <button onclick="closeModal('receipt-modal')" class="text-slate-400 hover:text-slate-600 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Khung in ấn biên lai -->
+      <div id="print-area" class="p-8 bg-white border border-slate-200 m-4 rounded-lg shadow-sm font-serif">
+        <!-- Quốc hiệu -->
+        <div class="text-center pb-4 border-b-2 border-slate-800">
+          <h4 class="text-xs uppercase font-bold tracking-widest text-slate-800">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+          <p class="text-xs font-semibold italic text-slate-700">Độc lập - Tự do - Hạnh phúc</p>
+          <div class="w-24 h-0.5 bg-slate-400 mx-auto my-1.5"></div>
+          <h2 class="text-lg font-bold uppercase text-slate-900 mt-2">BIÊN LAI THU CÁC KHOẢN ĐÓNG GÓP</h2>
+          <p class="text-xs text-slate-600 font-sans">Tổ dân phố số 5 · Phường Dịch Vọng Hậu · Quận Cầu Giấy, TP. Hà Nội</p>
+          <p class="text-xs font-mono font-bold text-blue-800 mt-1" id="rec-code">Số: BL-2026-0001</p>
+        </div>
+
+        <!-- Thông tin người nộp -->
+        <div class="py-4 space-y-2 text-xs text-slate-800">
+          <div class="flex">
+            <span class="w-40 font-bold">Họ và tên người nộp:</span>
+            <span id="rec-payer" class="font-bold uppercase text-blue-900">--</span>
+          </div>
+          <div class="flex">
+            <span class="w-40 font-bold">Mã sổ hộ khẩu:</span>
+            <span id="rec-maho" class="font-mono font-bold">--</span>
+          </div>
+          <div class="flex">
+            <span class="w-40 font-bold">Địa chỉ cư trú:</span>
+            <span id="rec-address">--</span>
+          </div>
+          <div class="flex">
+            <span class="w-40 font-bold">Nội dung đóng góp:</span>
+            <span id="rec-fee-name" class="font-semibold text-slate-900">--</span>
+          </div>
+          <div class="flex">
+            <span class="w-40 font-bold">Số tiền đã nộp:</span>
+            <span id="rec-amount" class="font-bold text-emerald-800 text-sm">--</span>
+          </div>
+          <div class="flex">
+            <span class="w-40 font-bold">Hình thức thu:</span>
+            <span id="rec-method">--</span>
+          </div>
+          <div class="flex">
+            <span class="w-40 font-bold">Ghi chú:</span>
+            <span id="rec-notes" class="italic text-slate-600">--</span>
+          </div>
+        </div>
+
+        <!-- Chữ ký & Ngày tháng -->
+        <div class="pt-6 border-t border-slate-200 grid grid-cols-2 text-center text-xs">
+          <div>
+            <p class="font-bold">NGƯỜI NỘP TIỀN</p>
+            <p class="text-[11px] italic text-slate-500">(Ký và ghi rõ họ tên)</p>
+            <div class="h-16"></div>
+            <p id="rec-payer-sign" class="font-bold text-slate-800">--</p>
+          </div>
+
+          <div>
+            <p id="rec-date" class="italic text-slate-600 mb-1">Dịch Vọng Hậu, ngày ... tháng ... năm 2026</p>
+            <p class="font-bold">TM. BAN QUẢN LÝ TDP SỐ 5</p>
+            <p class="text-[11px] italic text-slate-500">NGƯỜI THU TIỀN</p>
+            <div class="h-16 flex items-center justify-center">
+              <span class="text-xs px-2 py-0.5 rounded border border-emerald-400 text-emerald-700 bg-emerald-50 font-sans font-bold">
+                ✓ ĐÃ XÁC THỰC ĐIỆN TỬ
+              </span>
+            </div>
+            <p id="rec-collector-sign" class="font-bold text-slate-800">Nguyễn Văn Hưng</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-3 no-print">
+        <button onclick="window.print()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-print"></i> In Biên Lai
+        </button>
+        <button onclick="closeModal('receipt-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/services/hoKhauService.js"></script>
+  <script src="../js/services/nhanKhauService.js"></script>
+  <script src="../js/services/thuPhiService.js"></script>
+  <script src="../js/services/phanAnhService.js"></script>
+  <script src="../js/auth.js"></script>
+
+  <script>
+    function formatMoney(amount) {
+      return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    }
+
+    // Chuyển đổi Tab
+    function switchTab(tab) {
+      const recordsView = document.getElementById('view-records');
+      const categoriesView = document.getElementById('view-categories');
+      const recordsBtn = document.getElementById('tab-records-btn');
+      const categoriesBtn = document.getElementById('tab-categories-btn');
+
+      if (tab === 'records') {
+        recordsView.classList.remove('hidden');
+        categoriesView.classList.add('hidden');
+        recordsBtn.className = "pb-3 px-3 text-xs md:text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition flex items-center gap-2";
+        categoriesBtn.className = "pb-3 px-3 text-xs md:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2";
+      } else {
+        recordsView.classList.add('hidden');
+        categoriesView.classList.remove('hidden');
+        categoriesBtn.className = "pb-3 px-3 text-xs md:text-sm font-bold border-b-2 border-blue-600 text-blue-600 transition flex items-center gap-2";
+        recordsBtn.className = "pb-3 px-3 text-xs md:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition flex items-center gap-2";
+        loadCategoriesGrid();
+      }
+    }
+
+    // Tải danh sách bộ lọc khoản thu
+    function populateFeeFilter() {
+      const list = thuPhiService.getKhoanThuList();
+      const select = document.getElementById('filter-khoan-thu');
+      select.innerHTML = '<option value="all">-- Tất cả khoản thu / Quỹ --</option>' +
+        list.map(kt => `<option value="${kt.id}">${kt.tenKhoanThu}</option>`).join('');
+    }
+
+    // Tải và hiển thị danh sách bản ghi thu
+    function loadFeeRecords() {
+      const kw = document.getElementById('search-record-input').value;
+      const khoanThuId = document.getElementById('filter-khoan-thu').value;
+      const trangThai = document.getElementById('filter-trang-thai').value;
+
+      const list = thuPhiService.search(kw, khoanThuId, trangThai);
+      const stats = thuPhiService.getStats();
+
+      // Cập nhật thẻ chỉ số
+      document.getElementById('stat-tong-da-thu').textContent = formatMoney(stats.tongDaThu);
+      document.getElementById('stat-tong-ke-hoach').textContent = formatMoney(stats.tongDuKien);
+      document.getElementById('stat-ty-le').textContent = `Đạt ${stats.tyLe}% chỉ tiêu`;
+      document.getElementById('stat-ho-da-nop').textContent = stats.soHoDaNop;
+      document.getElementById('stat-ho-chua-nop').textContent = stats.soHoChuaNop;
+
+      const tbody = document.getElementById('records-table-body');
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center py-8 text-slate-400">Không tìm thấy bản ghi thu phí nào khớp với điều kiện lọc.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(item => {
+        let badgeClass = 'badge-danger';
+        if (item.trangThai === 'Đã nộp') badgeClass = 'badge-success';
+        else if (item.trangThai === 'Nộp thiếu') badgeClass = 'badge-warning';
+        else if (item.trangThai === 'Miễn giảm') badgeClass = 'badge-info';
+
+        return `
+          <tr class="hover:bg-slate-50 transition border-b border-slate-100">
+            <td class="font-bold text-blue-700 text-xs">${item.maHo}</td>
+            <td>
+              <div class="font-bold text-slate-800">${item.chuHo}</div>
+              <div class="text-[11px] text-slate-400 line-clamp-1">${item.diaChi}</div>
+            </td>
+            <td>
+              <span class="font-semibold text-slate-700 text-xs">${item.tenKhoanThu}</span>
+            </td>
+            <td class="text-right font-mono text-xs font-semibold text-slate-600">
+              ${formatMoney(item.soTienPhaiNop)}
+            </td>
+            <td class="text-right font-mono text-xs font-bold ${item.soTienDaNop > 0 ? 'text-emerald-700' : 'text-slate-400'}">
+              ${formatMoney(item.soTienDaNop)}
+            </td>
+            <td class="text-center">
+              <span class="badge ${badgeClass}">${item.trangThai}</span>
+            </td>
+            <td class="text-xs text-slate-500">${item.ngayNop || '--'}</td>
+            <td class="text-xs">
+              <div class="font-medium text-slate-700">${item.phuongThuc || '--'}</div>
+              <div class="font-mono text-[10px] text-blue-600">${item.maBienLai || ''}</div>
+            </td>
+            <td class="text-right whitespace-nowrap">
+              ${item.trangThai !== 'Đã nộp' ? `
+                <button onclick="openCollectModalForRecord('${item.id}')" class="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-md transition" title="Ghi nhận nộp tiền">
+                  <i class="fa-solid fa-money-bill-wave"></i>
+                </button>
+              ` : ''}
+              ${item.soTienDaNop > 0 ? `
+                <button onclick="showReceipt('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-md transition" title="Xem & In biên lai điện tử">
+                  <i class="fa-solid fa-print"></i>
+                </button>
+              ` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Tải thẻ danh mục các quỹ & khoản thu
+    function loadCategoriesGrid() {
+      const list = thuPhiService.getKhoanThuList();
+      const records = thuPhiService.getAllRecords();
+      const grid = document.getElementById('categories-grid');
+
+      grid.innerHTML = list.map(kt => {
+        const ktRecords = records.filter(r => r.khoanThuId === kt.id);
+        const daThu = ktRecords.reduce((sum, r) => sum + (r.soTienDaNop || 0), 0);
+        const keHoach = ktRecords.reduce((sum, r) => sum + (r.soTienPhaiNop || 0), 0);
+        const tyLe = keHoach > 0 ? Math.round((daThu / keHoach) * 100) : 0;
+
+        return `
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <span class="badge ${kt.loaiKhoan === 'Bắt buộc' ? 'badge-danger' : 'badge-info'} text-[11px]">${kt.loaiKhoan}</span>
+                <span class="text-xs text-slate-400 font-mono">${kt.id}</span>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm mb-1">${kt.tenKhoanThu}</h3>
+              <p class="text-xs text-slate-500 line-clamp-2 mb-4">${kt.moTa || 'Thu theo quy định tổ dân phố'}</p>
+
+              <div class="space-y-1.5 text-xs py-3 border-y border-slate-100">
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Mức đóng:</span>
+                  <span class="font-bold text-slate-800">${formatMoney(kt.mucThu)} / ${kt.donViTinh}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Hạn nộp:</span>
+                  <span class="font-semibold text-rose-600">${kt.hanNop || 'Hết năm 2026'}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-500">Đã thu:</span>
+                  <span class="font-bold text-emerald-700">${formatMoney(daThu)} (${tyLe}%)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 flex items-center justify-between">
+              <button onclick="filterByKhoanThu('${kt.id}')" class="text-xs font-semibold text-blue-600 hover:underline">
+                Xem ${ktRecords.length} hộ liên quan →
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterByKhoanThu(ktId) {
+      switchTab('records');
+      document.getElementById('filter-khoan-thu').value = ktId;
+      loadFeeRecords();
+    }
+
+    // Modal Control
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Mở modal thu phí
+    function openCollectModal() {
+      const records = thuPhiService.getAllRecords();
+      const select = document.getElementById('form-select-record');
+
+      select.innerHTML = records.map(r => 
+        `<option value="${r.id}" data-amount="${r.soTienPhaiNop}">${r.maHo} - ${r.chuHo} (${r.tenKhoanThu} - ${formatMoney(r.soTienPhaiNop)})</option>`
+      ).join('');
+
+      if (records.length > 0) {
+        document.getElementById('form-amount').value = records[0].soTienPhaiNop;
+      }
+      document.getElementById('form-collect-date').value = new Date().toISOString().split('T')[0];
+
+      select.onchange = function() {
+        const selected = select.options[select.selectedIndex];
+        document.getElementById('form-amount').value = selected.getAttribute('data-amount') || 0;
+      };
+
+      openModal('collect-modal');
+    }
+
+    function openCollectModalForRecord(recId) {
+      openCollectModal();
+      document.getElementById('form-select-record').value = recId;
+      const rec = thuPhiService.getRecordById(recId);
+      if (rec) {
+        document.getElementById('form-amount').value = rec.soTienPhaiNop - rec.soTienDaNop;
+      }
+    }
+
+    // Xử lý nộp tiền
+    document.getElementById('collect-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const recId = document.getElementById('form-select-record').value;
+      const amount = document.getElementById('form-amount').value;
+      const method = document.getElementById('form-method').value;
+      const collector = document.getElementById('form-collector').value;
+      const notes = document.getElementById('form-collect-notes').value;
+
+      const record = thuPhiService.recordPayment(recId, amount, method, collector, notes);
+      closeModal('collect-modal');
+      loadFeeRecords();
+
+      if (record) {
+        showReceipt(record.id);
+      }
+    });
+
+    // Mở modal thêm khoản thu
+    function openAddCategoryModal() {
+      document.getElementById('category-form').reset();
+      document.getElementById('cat-deadline').value = '2026-12-31';
+      openModal('category-modal');
+    }
+
+    document.getElementById('category-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        tenKhoanThu: document.getElementById('cat-name').value.trim(),
+        loaiKhoan: document.getElementById('cat-type').value,
+        mucThu: document.getElementById('cat-amount').value,
+        donViTinh: document.getElementById('cat-unit').value.trim(),
+        hanNop: document.getElementById('cat-deadline').value,
+        moTa: document.getElementById('cat-desc').value.trim()
+      };
+
+      thuPhiService.addKhoanThu(data);
+      closeModal('category-modal');
+      populateFeeFilter();
+      loadFeeRecords();
+      loadCategoriesGrid();
+      alert(`Đã tạo khoản thu "${data.tenKhoanThu}" và khởi tạo nghĩa vụ nộp cho toàn bộ các hộ gia đình.`);
+    });
+
+    // Hiển thị Biên lai
+    function showReceipt(recId) {
+      const receipt = thuPhiService.getReceiptData(recId);
+      if (!receipt) return;
+
+      document.getElementById('rec-code').textContent = `Số: ${receipt.maBienLai}`;
+      document.getElementById('rec-payer').textContent = receipt.hoTenNguoiNop;
+      document.getElementById('rec-maho').textContent = receipt.maHo;
+      document.getElementById('rec-address').textContent = receipt.diaChi;
+      document.getElementById('rec-fee-name').textContent = receipt.noiDung;
+      document.getElementById('rec-amount').textContent = formatMoney(receipt.soTien);
+      document.getElementById('rec-method').textContent = receipt.hinhThuc;
+      document.getElementById('rec-notes').textContent = receipt.ghiChu || 'Đã nộp đủ vào tài khoản quỹ tổ dân phố';
+      document.getElementById('rec-payer-sign').textContent = receipt.hoTenNguoiNop;
+      document.getElementById('rec-date').textContent = `Dịch Vọng Hậu, ngày ${receipt.ngayThu.split('-')[2]} tháng ${receipt.ngayThu.split('-')[1]} năm ${receipt.ngayThu.split('-')[0]}`;
+      document.getElementById('rec-collector-sign').textContent = receipt.nguoiThuTien;
+
+      openModal('receipt-modal');
+    }
+
+    // Xuất CSV
+    function exportFeeCSV() {
+      const list = thuPhiService.getAllRecords();
+      let csv = "Mã Hộ,Chủ Hộ,Địa Chỉ,Khoản Thu,Số Tiền Phải Nộp,Số Tiền Đã Nộp,Trạng Thái,Ngày Nộp,Mã Biên Lai\n";
+      list.forEach(i => {
+        csv += `"${i.maHo}","${i.chuHo}","${i.diaChi}","${i.tenKhoanThu}",${i.soTienPhaiNop},${i.soTienDaNop},"${i.trangThai}","${i.ngayNop || ''}","${i.maBienLai || ''}"\n`;
+      });
+
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Bao_cao_thu_phi_TDP5_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Lắng nghe sự kiện
+    document.getElementById('search-record-input').addEventListener('input', loadFeeRecords);
+    document.getElementById('filter-khoan-thu').addEventListener('change', loadFeeRecords);
+    document.getElementById('filter-trang-thai').addEventListener('change', loadFeeRecords);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      populateFeeFilter();
+      loadFeeRecords();
+    });
+  </script>
+</body>
+</html>

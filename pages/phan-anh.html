@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiếp Nhận Phản Ánh & Kiến Nghị - Tổ Dân Phố Số 5</title>
+  <meta name="description" content="Kênh tiếp nhận và giải quyết ý kiến, phản ánh về môi trường, an ninh trật tự của bà con Tổ dân phố số 5.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+  <div class="app-container">
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <!-- SIDEBAR BÊN TRÁI -->
+    <aside id="app-sidebar" class="sidebar">
+      <div class="p-5 border-b border-slate-700/60 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-blue-500/30">
+          <i class="fa-solid fa-landmark-flag"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-bold text-white tracking-wide uppercase leading-tight">Tổ Dân Phố Số 5</h2>
+          <p class="text-[11px] text-slate-400">P. Dịch Vọng Hậu · Cầu Giấy</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 py-4 space-y-1 overflow-y-auto">
+        <a href="../index.html" class="nav-item">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Bảng điều khiển</span>
+        </a>
+
+        <a href="ho-khau.html" class="nav-item">
+          <i class="fa-solid fa-address-book"></i>
+          <span>Sổ Hộ Khẩu</span>
+        </a>
+
+        <a href="nhan-khau.html" class="nav-item">
+          <i class="fa-solid fa-users"></i>
+          <span>Cư Dân / Nhân Khẩu</span>
+        </a>
+
+        <a href="thu-phi.html" class="nav-item">
+          <i class="fa-solid fa-money-check-dollar"></i>
+          <span>Thu Phí & Quỹ Đóng Góp</span>
+        </a>
+
+        <a href="phan-anh.html" class="nav-item active">
+          <i class="fa-solid fa-comments"></i>
+          <span>Phản Ánh & Kiến Nghị</span>
+        </a>
+
+        <div class="pt-4 pb-2 px-4">
+          <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Hệ Thống & Báo Cáo</div>
+        </div>
+
+        <a href="#" onclick="alert('Đường dây nóng tiếp nhận phản ánh 24/7 của UBND Phường: 024.3756.xxxx'); return false;" class="nav-item text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-headset"></i>
+          <span>Tổng Đài Cơ Sở</span>
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-700/60 bg-slate-900/40">
+        <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Ý kiến nhân dân lắng nghe 24/7</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Dân biết, dân bàn, dân kiểm tra</p>
+      </div>
+    </aside>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <div class="main-content">
+      <!-- TOP NAVBAR -->
+      <header class="top-navbar">
+        <div class="flex items-center gap-3">
+          <button id="sidebar-toggle-btn" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Menu">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+          <div>
+            <h1 class="text-base font-bold text-slate-800 leading-tight">Tiếp Nhận & Xử Lý Ý Kiến, Phản Ánh Cư Dân</h1>
+            <p class="text-xs text-slate-500 hidden sm:block">Lắng nghe kịp thời phản ánh về an ninh trật tự, vệ sinh môi trường và hạ tầng dân sinh</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2.5 pl-3 border-l border-slate-200">
+            <img id="navbar-user-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-slate-300">
+            <div class="hidden md:block text-left">
+              <div id="navbar-user-name" class="text-xs font-bold text-slate-800">Nguyễn Văn Hưng</div>
+              <div id="navbar-user-role" class="text-[11px] text-blue-600 font-semibold">Tổ trưởng TDP 5</div>
+            </div>
+            <button id="navbar-logout-btn" class="ml-1 p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition text-xs font-semibold" title="Đăng xuất">
+              <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE CONTENT -->
+      <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6">
+
+        <!-- 4 KPI Summary Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-blue-600">
+            <span class="text-xs font-bold text-slate-500 uppercase">Tổng Số Phản Ánh</span>
+            <div id="pa-stat-tong" class="text-2xl font-bold text-blue-900 mt-1">5</div>
+            <span class="text-[11px] text-blue-600 font-medium">Bà con gửi lên</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-rose-600">
+            <span class="text-xs font-bold text-slate-500 uppercase">Vấn Đề Khẩn Cấp</span>
+            <div id="pa-stat-khan-cap" class="text-2xl font-bold text-rose-700 mt-1">2</div>
+            <span class="text-[11px] text-rose-600 font-medium">Ưu tiên xử lý ngay</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-amber-500">
+            <span class="text-xs font-bold text-slate-500 uppercase">Đang Giải Quyết</span>
+            <div id="pa-stat-dang-xu-ly" class="text-2xl font-bold text-amber-700 mt-1">2</div>
+            <span class="text-[11px] text-amber-600 font-medium">Đang triển khai</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-emerald-600">
+            <span class="text-xs font-bold text-slate-500 uppercase">Đã Giải Quyết Dứt Điểm</span>
+            <div id="pa-stat-da-xu-ly" class="text-2xl font-bold text-emerald-700 mt-1">2</div>
+            <span class="text-[11px] text-emerald-600 font-medium">Đã thông báo bà con</span>
+          </div>
+        </div>
+
+        <!-- Filter bar & Create Button -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+              </span>
+              <input 
+                type="text" 
+                id="pa-search-input" 
+                placeholder="Tìm theo Tiêu đề, Người gửi, Nội dung, Số điện thoại..." 
+                class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs md:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white"
+              >
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="pa-filter-linh-vuc" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Lĩnh vực --</option>
+                <option value="Vệ sinh môi trường">Vệ sinh môi trường</option>
+                <option value="An ninh & Tiếng ồn">An ninh & Tiếng ồn</option>
+                <option value="Hạ tầng & Đô thị">Hạ tầng & Đô thị</option>
+                <option value="Cải cách hành chính">Cải cách hành chính</option>
+              </select>
+
+              <select id="pa-filter-muc-do" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Mức độ khẩn --</option>
+                <option value="Khẩn cấp">Khẩn cấp</option>
+                <option value="Quan trọng">Quan trọng</option>
+                <option value="Bình thường">Bình thường</option>
+              </select>
+
+              <select id="pa-filter-trang-thai" class="bg-slate-50 border border-slate-300 rounded-lg py-2 px-3 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="all">-- Trạng thái --</option>
+                <option value="Đã xử lý">Đã xử lý</option>
+                <option value="Đang xử lý">Đang xử lý</option>
+                <option value="Chờ tiếp nhận">Chờ tiếp nhận</option>
+              </select>
+
+              <button onclick="openCreateIssueModal()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+                <i class="fa-solid fa-plus-circle"></i>
+                <span>Ghi Nhận Phản Ánh Mới</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DANH SÁCH CÁC PHẢN ÁNH (CARDS VIEW) -->
+        <div id="issues-list-container" class="space-y-4">
+          <!-- Nạp tự động qua JavaScript -->
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL 1: TIẾP NHẬN PHẢN ÁNH MỚI -->
+  <div id="create-issue-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-blue-900 text-white rounded-t-xl">
+        <h3 class="text-base font-bold flex items-center gap-2">
+          <i class="fa-solid fa-pen-fancy"></i>
+          <span>Ghi Nhận Ý Kiến / Phản Ánh Của Cư Dân</span>
+        </h3>
+        <button onclick="closeModal('create-issue-modal')" class="text-white/80 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="create-issue-form" class="p-5 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Tiêu Đề Tóm Tắt (*)</label>
+          <input type="text" id="issue-title" required placeholder="Ví dụ: Đèn đường ngách 12/48 bị hỏng cần thay bóng" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Họ Và Tên Cư Dân Phản Ánh (*)</label>
+            <input type="text" id="issue-reporter" required placeholder="Nguyễn Văn A" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Số Điện Thoại Liên Hệ (*)</label>
+            <input type="tel" id="issue-phone" required placeholder="09xxxxxxxx" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Địa Chỉ / Vị Trí Sự Việc Xảy Ra (*)</label>
+            <input type="text" id="issue-address" required placeholder="Số nhà ..., Ngõ 48 Phan Văn Trường" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Lĩnh Vực (*)</label>
+            <select id="issue-category" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Vệ sinh môi trường">Vệ sinh môi trường & Rác thải</option>
+              <option value="An ninh & Tiếng ồn">An ninh trật tự & Tiếng ồn</option>
+              <option value="Hạ tầng & Đô thị">Hạ tầng đô thị (Đèn, cống, đường ngõ)</option>
+              <option value="Cải cách hành chính">Cải cách hành chính & VNeID</option>
+              <option value="Khác">Lĩnh vực khác</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mức Độ Khẩn Cấp (*)</label>
+            <select id="issue-priority" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white">
+              <option value="Bình thường">Bình thường (Ý kiến đóng góp thông thường)</option>
+              <option value="Quan trọng">Quan trọng (Cần giải quyết trong 24h - 48h)</option>
+              <option value="Khẩn cấp">Khẩn cấp (Nguy cơ cháy nổ, trật tự, dịch bệnh...)</option>
+            </select>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Nội Dung Chi Tiết Sự Việc (*)</label>
+            <textarea id="issue-desc" rows="3" required placeholder="Mô tả cụ thể thời gian, địa điểm, sự việc đang gây khó khăn gì cho bà con..." class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:bg-white"></textarea>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal('create-issue-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition">
+            Lưu Tiếp Nhận
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: CẬP NHẬT KẾT QUẢ XỬ LÝ & PHẢN HỒI -->
+  <div id="resolve-issue-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-emerald-800 text-white rounded-t-xl">
+        <h3 class="text-base font-bold flex items-center gap-2">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <span>Cập Nhật Tiến Độ & Phản Hồi Cho Dân</span>
+        </h3>
+        <button onclick="closeModal('resolve-issue-modal')" class="text-white/80 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="resolve-issue-form" class="p-5 space-y-4">
+        <input type="hidden" id="resolve-id">
+
+        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
+          <span class="font-bold text-slate-700 block mb-1" id="resolve-summary-title">Tiêu đề: ...</span>
+          <p class="text-slate-600" id="resolve-summary-desc">Nội dung: ...</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Trạng Thái Xử Lý (*)</label>
+            <select id="resolve-status" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white font-semibold">
+              <option value="Đã xử lý">✓ Đã xử lý dứt điểm</option>
+              <option value="Đang xử lý">⏳ Đang xử lý / Phối hợp các đơn vị</option>
+              <option value="Chờ tiếp nhận">Chờ phân công tiếp nhận</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Cán Bộ Trực Tiếp Xử Lý (*)</label>
+            <input type="text" id="resolve-handler" required value="Nguyễn Văn Hưng (Tổ trưởng)" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Kết Quả Giải Quyết & Thông Báo Cho Bà Con (*)</label>
+            <textarea id="resolve-result" rows="4" required placeholder="Ghi rõ hành động cụ thể đã thực hiện (ví dụ: đã phối hợp cùng Công an phường lập biên bản lúc ..., đã thay 02 bóng đèn mới lúc ...)" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-600 focus:bg-white text-slate-800"></textarea>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal('resolve-issue-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow transition">
+            Lưu Kết Quả & Thông Báo
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/services/hoKhauService.js"></script>
+  <script src="../js/services/nhanKhauService.js"></script>
+  <script src="../js/services/thuPhiService.js"></script>
+  <script src="../js/services/phanAnhService.js"></script>
+  <script src="../js/auth.js"></script>
+
+  <script>
+    // Tải và hiển thị danh sách phản ánh
+    function loadIssues() {
+      const kw = document.getElementById('pa-search-input').value;
+      const linhVuc = document.getElementById('pa-filter-linh-vuc').value;
+      const mucDo = document.getElementById('pa-filter-muc-do').value;
+      const trangThai = document.getElementById('pa-filter-trang-thai').value;
+
+      const list = phanAnhService.search(kw, linhVuc, mucDo, trangThai);
+      const stats = phanAnhService.getStats();
+
+      // Cập nhật card chỉ số
+      document.getElementById('pa-stat-tong').textContent = stats.tongSo;
+      document.getElementById('pa-stat-khan-cap').textContent = stats.khanCap;
+      document.getElementById('pa-stat-dang-xu-ly').textContent = stats.dangXuLy;
+      document.getElementById('pa-stat-da-xu-ly').textContent = stats.daXuLy;
+
+      const container = document.getElementById('issues-list-container');
+      if (list.length === 0) {
+        container.innerHTML = `<div class="bg-white p-8 rounded-xl border border-slate-200 text-center text-slate-400">Không tìm thấy ý kiến, phản ánh nào khớp với bộ lọc.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(item => {
+        let badgeUrgent = 'badge-info';
+        if (item.mucDo === 'Khẩn cấp') badgeUrgent = 'badge-danger';
+        else if (item.mucDo === 'Quan trọng') badgeUrgent = 'badge-warning';
+
+        let badgeStatus = 'badge-warning';
+        if (item.trangThai === 'Đã xử lý') badgeStatus = 'badge-success';
+        else if (item.trangThai === 'Đang xử lý') badgeStatus = 'badge-info';
+
+        return `
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 space-y-4 hover:border-blue-200 transition">
+            <!-- Header card -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">#${item.id}</span>
+                <span class="badge ${badgeUrgent} text-xs">${item.mucDo}</span>
+                <span class="badge ${badgeStatus} text-xs">${item.trangThai}</span>
+                <span class="text-xs text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+                  <i class="fa-solid fa-tag text-[10px] mr-1"></i>${item.linhVuc}
+                </span>
+              </div>
+              <span class="text-xs text-slate-400 flex items-center gap-1">
+                <i class="fa-regular fa-clock"></i> ${item.ngayGui}
+              </span>
+            </div>
+
+            <!-- Title & Content -->
+            <div>
+              <h3 class="text-base font-bold text-slate-900 leading-snug">${item.tieuDe}</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
+                "${item.noiDung}"
+              </p>
+            </div>
+
+            <!-- Reporter info -->
+            <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500 py-1">
+              <span><i class="fa-solid fa-user text-slate-400 mr-1"></i>Người gửi: <b class="text-slate-800">${item.nguoiGui}</b></span>
+              <span><i class="fa-solid fa-phone text-slate-400 mr-1"></i>${item.soDienThoai || 'Chưa cung cấp SĐT'}</span>
+              <span><i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${item.diaChi}</span>
+            </div>
+
+            <!-- Resolution / Feedback Block -->
+            ${item.ketQuaXuLy ? `
+              <div class="p-3.5 bg-emerald-50/80 rounded-xl border border-emerald-200 text-xs text-emerald-950 space-y-1.5">
+                <div class="flex items-center justify-between font-bold text-emerald-900">
+                  <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> Kết Quả Xử Lý Của Ban Quản Lý:</span>
+                  <span class="text-[11px] font-normal text-emerald-700">${item.ngayXuLy || ''}</span>
+                </div>
+                <p class="leading-relaxed text-emerald-900 font-medium">${item.ketQuaXuLy}</p>
+                <div class="text-[11px] text-emerald-800 font-semibold pt-1">
+                  Cán bộ thực hiện: ${item.nguoiXuLy || 'Ban cán sự TDP 5'}
+                </div>
+              </div>
+            ` : `
+              <div class="p-3 bg-amber-50/70 rounded-xl border border-amber-200 text-xs text-amber-800 flex items-center justify-between">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-hourglass-half text-amber-600"></i> Đang chờ cán bộ phân công và giải quyết thực tế tại cơ sở...</span>
+              </div>
+            `}
+
+            <!-- Action buttons -->
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2">
+              <button onclick="openResolveModal('${item.id}')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <span>Cập Nhật Tiến Độ & Phản Hồi</span>
+              </button>
+              <button onclick="deleteIssue('${item.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Xóa phản ánh">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Modal Control
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Mở modal tạo mới
+    function openCreateIssueModal() {
+      document.getElementById('create-issue-form').reset();
+      openModal('create-issue-modal');
+    }
+
+    document.getElementById('create-issue-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {
+        tieuDe: document.getElementById('issue-title').value.trim(),
+        nguoiGui: document.getElementById('issue-reporter').value.trim(),
+        soDienThoai: document.getElementById('issue-phone').value.trim(),
+        diaChi: document.getElementById('issue-address').value.trim(),
+        linhVuc: document.getElementById('issue-category').value,
+        mucDo: document.getElementById('issue-priority').value,
+        noiDung: document.getElementById('issue-desc').value.trim(),
+        trangThai: 'Chờ tiếp nhận'
+      };
+
+      phanAnhService.create(data);
+      closeModal('create-issue-modal');
+      loadIssues();
+      alert(`Đã tiếp nhận ý kiến: "${data.tieuDe}". Ban quản lý sẽ sớm xử lý và phản hồi.`);
+    });
+
+    // Mở modal giải quyết
+    function openResolveModal(id) {
+      const item = phanAnhService.getById(id);
+      if (!item) return;
+
+      document.getElementById('resolve-id').value = item.id;
+      document.getElementById('resolve-summary-title').textContent = `Tiêu đề: ${item.tieuDe} (${item.nguoiGui} - ${item.diaChi})`;
+      document.getElementById('resolve-summary-desc').textContent = `Nội dung: ${item.noiDung}`;
+      
+      document.getElementById('resolve-status').value = item.trangThai === 'Chờ tiếp nhận' ? 'Đã xử lý' : item.trangThai;
+      document.getElementById('resolve-result').value = item.ketQuaXuLy || '';
+
+      const currentUser = authService.getCurrentUser();
+      document.getElementById('resolve-handler').value = currentUser ? `${currentUser.name} (${currentUser.badge})` : 'Nguyễn Văn Hưng (Tổ trưởng)';
+
+      openModal('resolve-issue-modal');
+    }
+
+    document.getElementById('resolve-issue-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('resolve-id').value;
+      const newStatus = document.getElementById('resolve-status').value;
+      const ketQua = document.getElementById('resolve-result').value.trim();
+      const handler = document.getElementById('resolve-handler').value.trim();
+
+      phanAnhService.updateStatus(id, newStatus, ketQua, handler);
+      closeModal('resolve-issue-modal');
+      loadIssues();
+    });
+
+    function deleteIssue(id) {
+      if (confirm(`Đồng chí có chắc chắn muốn xóa phản ánh #${id}?`)) {
+        phanAnhService.delete(id);
+        loadIssues();
+      }
+    }
+
+    // Lắng nghe sự kiện
+    document.getElementById('pa-search-input').addEventListener('input', loadIssues);
+    document.getElementById('pa-filter-linh-vuc').addEventListener('change', loadIssues);
+    document.getElementById('pa-filter-muc-do').addEventListener('change', loadIssues);
+    document.getElementById('pa-filter-trang-thai').addEventListener('change', loadIssues);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadIssues();
+    });
+  </script>
+</body>
+</html>
